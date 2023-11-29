@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Candidate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin: 50px auto;
+            width: 50%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="/candidates/add" method="post">
+        <label for="fullName">Name:</label>
+        <input type="text" placeholder="Enter name" id="fullName" name="fullName" required>
+
+        <label for="email">Email:</label>
+        <input type="email" placeholder="Enter email" id="email" name="email" required>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" name="dob" required>
+
+        <label for="phone">Phone:</label>
+        <input type="text" placeholder="Enter phone" id="phone" name="phone" required>
+
+        <label for="address">Address:</label>
+        <select name="address" id="address" required>
+            <option th:each="country: ${listCountryCodes}" th:value="${country.getAlpha2()}" th:text="${country.getName()}"></option>
+        </select>
+
+        <button type="submit">Add Candidate</button>
+    </form>
+</div>
+</body>
+</html>

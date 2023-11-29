@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Candidate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin: 50px auto;
+            width: 50%;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form action="/candidates/update" method="post" th:object="${candidate}">
+        <input type="hidden" name="id" th:value="*{id}">
+        <input type="hidden" name="idAdd" th:value="*{address.getId()}">
+
+        <div class="form-group">
+            <label for="fullName">Name</label>
+            <input th:value="*{fullName}" type="text" placeholder="Enter name" id="fullName" name="fullName">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input th:value="*{email}" type="email" placeholder="Enter email" id="email" name="email">
+        </div>
+
+        <div class="form-group">
+            <label for="dob">Dob</label>
+            <input th:value="*{dob}" type="date" id="dob" name="dob">
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone</label>
+            <input th:value="*{phone}" type="text" placeholder="Enter phone" id="phone" name="phone">
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address</label>
+            <select name="address" id="address">
+                <option th:each="country: ${listCountryCodes}" th:value="${country.getAlpha2()}" th:text="${country.getName()}" th:selected="${candidate.getAddress().getCountry()==country}?true:false"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Update</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
